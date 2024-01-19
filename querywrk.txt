@@ -1,0 +1,36 @@
+from myemp.models import Employee
+
+Employee.objects.create(manager_id=1,name="alen smith",department="admin",salary=90000,city="boulder")
+Employee.objects.create(manager_id=1,name="amy mars",department="admin",salary=50000,city="longmont")
+Employee.objects.create(manager_id=1,name="logan mars",department="admin",salary=70000,city="longmont")
+Employee.objects.create(manager_id=1,name="james mont",department="marketing",salary=55000,city="")
+Employee.objects.create(manager_id=6,name="john smith",department="marketing",salary=60000,city="boulder")
+Employee.objects.create(manager_id=6,name="lily mars",department="marketing",salary=95000,city="")
+Employee.objects.create(manager_id=6,name="ravi grace",department="database",salary=75000,city="longmont")
+Employee.objects.create(manager_id=6,name="tara frank",department="database",salary=80000,city="longmont")
+Employee.objects.create(manager_id=6,name="tom ford",department="database",salary=65000,city="")
+Employee.objects.create(manager_id=6,name="william grace",department="database",salary=85000,city="longmont")
+
+qs=Employee.objects.all()
+qs
+
+qs=Employee.objects.get(id=2)
+qs
+
+qs=Employee.objects.filter(department="admin",city="boulder")
+qs
+
+
+qs=Employee.objects.filter(id=4).update(department="marketing)
+
+Employee.objects.create(manager_id=7,name="jose",department="marketing",salary=70000,city="longmont")
+
+Employee.objects.filter(id=6).delete()
+
+Employee.objects.filter(salary__lt=60000)
+Employee.objects.filter(salary__lte=60000)
+Employee.objects.filter(salary__gt=80000)
+Employee.objects.filter(salary__gte=90000)
+
+qs=Employee.objects.all().values_list("department",flat=True).distinct()
+qs

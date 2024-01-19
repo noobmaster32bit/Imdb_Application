@@ -1,0 +1,44 @@
+# initially import the model you are working in
+from myApp.models import Movie
+
+
+# to insert data
+Movie.objects.create(name="salaar",language="telugu",genre="Action",run_time=170,director="Prashanth Neel",actors="prabhas",year=2023)  
+
+
+# to fetch all data
+qs=Movie.objects.all()   
+
+
+# to fetch specific detail
+qs=Movie.objects.get(id=value)
+
+
+# to filter a value
+qs=Movie.objects.filter(column_name="value")
+
+
+# for updating an item
+Movie.objects.filter(id=value).update(key="value",key="value")
+
+
+# delete an item
+Movie.objects.filter(id=value).delete()
+
+
+# field lookup
+    movies below 2024
+< => __lt  //less than
+<=  => __lte// less than equalto
+> =>  __gt // greater than
+>= =>  __gte // greater than equalto
+
+
+# exclude an item
+Movie.objects.exclude(key="value")
+
+
+# query to list all genre
+qs=Movie.objects.all().values_list("genre",flat=True)
+qs=Movie.objects.all().values_list("genre",flat=True).distinct() // to remove duplicates
+
