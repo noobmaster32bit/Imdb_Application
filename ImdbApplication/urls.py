@@ -20,7 +20,7 @@ from myApp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('movies/all/',views.BookListView.as_view(),name="movie-list"),
+    path('movies/all/',views.MovieListView.as_view(),name="movie-list"),
     path('movies/<int:pk>/',views.MovieDetailView.as_view(),name="movie-detail"),
     path('movies/<int:pk>/remove/',views.MovieDeleteView.as_view(),name="movie-delete"),
     path('movies/add/',views.MovieCreateView.as_view(),name="movie-add"),

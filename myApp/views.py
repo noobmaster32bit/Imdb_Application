@@ -4,7 +4,7 @@ from myApp.models import Movie
 from django import forms
 # Create your views here.
 
-class BookListView(View):
+class MovieListView(View):
     def get(self,request,*args,**kwargs):
         qs=Movie.objects.all()
         return render(request,"movie_list.html",{"data":qs})
@@ -52,6 +52,25 @@ class MovieCreateView(View):
     # localhost:8000/movies/{id}/change
 class MovieUpdateView(View):
     def get(self,request,*args,**kwargs):
-        form=MovieForm()
+        id=kwargs.get("pk")
+        movie_object=Movie.objects.get(id=id)
+        data={
+            "name":movie_object.name,
+            "language":movie_object.language,
+            "genre":movie_object.genre,
+            "year":movie_object.year,
+            "director":movie_object.director,
+            "actors":movie_object.actors,
+            "run_time":movie_object.run_time
+        }
+        form=MovieForm(initial=data)
         return render(request,"movie_edit.html",{"form":form})
-    
+    def post(self,request,*args,**kwargs):
+        form=MovieForm(request.POST)
+        id=kwargs.get("pk")
+        if form.is_valid():
+            data=form.cleaned_data
+            Movie.objects.filter(id=id).update(**data)
+            return redirect("movie-list")
+        else:
+            return render(request,"movie_edit.html",{"form",form})
