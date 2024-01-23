@@ -48,4 +48,10 @@ class MovieCreateView(View):
         # data.pop("csrfmiddlewaretoken")
         # Movie.objects.create(**data) # unpack the dictionary
         # return redirect("movie-list")
+
+    # localhost:8000/movies/{id}/change
+class MovieUpdateView(View):
+    def get(self,request,*args,**kwargs):
+        form=MovieForm()
+        return render(request,"movie_edit.html",{"form":form})
     
