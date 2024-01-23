@@ -37,8 +37,15 @@ class MovieCreateView(View):
         return render(request,"movie_add.html",{"form":form})
     
     def post(self,request,*args,**kwargs):
-        data={k:v for k,v in request.POST.items()}
-        data.pop("csrfmiddlewaretoken")
-        Movie.objects.create(**data) # unpack the dictionary
-        return redirect("movie-list")
+        form=MovieForm(request.POST)
+        if form.is_valid():
+            data=form.cleaned_data
+            Movie.objects.create(**data)
+            return redirect("movie-list")
+        else:
+            return render(request,"movie_add.html",{"form":form})
+        # data={k:v for k,v in request.POST.items()}
+        # data.pop("csrfmiddlewaretoken")
+        # Movie.objects.create(**data) # unpack the dictionary
+        # return redirect("movie-list")
     
