@@ -25,5 +25,5 @@ urlpatterns = [
     path('movies/<int:pk>/remove/',views.MovieDeleteView.as_view(),name="movie-delete"),
     path('movies/add/',views.MovieCreateView.as_view(),name="movie-add"),
     path('movies/<int:pk>/change/',views.MovieUpdateView.as_view(),name="movie-edit"),
-    
+        
 ]
